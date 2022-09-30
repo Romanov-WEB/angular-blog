@@ -1,0 +1,33 @@
+.header {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  strong {
+    font-size: 22px;
+  }
+}
+
+.description {
+  margin-top: 30px;
+  p {
+    padding-bottom: 15px;
+    font-size: 18px;
+  }
+}
+
+.btn {
+  background: none;
+  border: none;
+}
+
+.btn-link {
+  cursor: pointer;
+}
