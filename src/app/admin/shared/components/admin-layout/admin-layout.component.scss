@@ -1,0 +1,35 @@
+.navigate-container {
+  background: #da4e4e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 35px;
+  h1 {
+    font-size: 28px;
+    a{
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
+
+.navigate-list {
+  display: flex;
+
+  li {
+    list-style-type: none;
+    margin-left: 30px;
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 22px;
+    }
+  }
+
+  li.active a {
+    color: black;
+    font-weight: bold;
+    cursor: default;
+  }
+}
