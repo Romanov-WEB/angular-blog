@@ -1,0 +1,61 @@
+.card {
+  border: 1px dotted black;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.header {
+ font-size: 28px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-top: 35px;
+  label {
+    font-size: 18px;
+    color: darkgray;
+    padding-bottom: 10px;
+  }
+  input {
+    padding: 8px;
+    font-size: 18px;
+    outline: none;
+  }
+  .validation {
+    margin-top: 15px;
+    small {
+      color: red;
+    }
+  }
+  &.invalid {
+    color: red;
+    input {
+      border-color: red;
+    }
+  }
+}
+
+.btn-form {
+  width: 135px;
+  border: none;
+  margin-top: 30px;
+  background: #da4e4e;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  color: white;
+}
+
+.btn-form:disabled {
+  background: #c1bdbd;
+  cursor: auto;
+}
+
+.error-card {
+  background: #da4e4e;
+  color: white;
+  margin-top: 20px;
+  padding: 20px 0;
+  text-align: center;
+}

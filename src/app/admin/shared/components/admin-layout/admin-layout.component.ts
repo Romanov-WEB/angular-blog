@@ -16,7 +16,6 @@ export class AdminLayoutComponent implements OnInit {
 
   loguot($event: MouseEvent) {
     $event.preventDefault()
-    console.log(this.router.url)
     this.router.navigate(['/admin', 'login'])
   }
 }
