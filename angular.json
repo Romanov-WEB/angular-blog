@@ -29,6 +29,9 @@
         },
         "@schematics/angular:service": {
           "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -38,6 +41,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["quill"],
             "outputPath": "dist/angular-blog",
             "index": "src/index.html",
             "main": "src/main.ts",

@@ -25,6 +25,9 @@ export class LoginPageComponent implements OnInit {
       if (params['loginAgain']) {
         this.massage = 'Введите логин и пароль!'
         this.render.markForCheck()
+      } else if (params['authFailed']) {
+        this.massage = 'Ссесия протухла!'
+        this.render.markForCheck()
       }
     })
     this.form = new FormGroup({
