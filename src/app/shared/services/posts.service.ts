@@ -5,7 +5,7 @@ import {Post} from "../../admin/shared/interfaces";
 import {environment} from "../../../environments/environment";
 
 @Injectable({providedIn: 'root'})
-export class PostService {
+export class PostsService {
   constructor(private http: HttpClient) {}
 
   create(post: Post): Observable<Post> {
@@ -16,6 +16,17 @@ export class PostService {
           id: response.name,
           date: new Date(post.date)
         }
+      })
+    )
+  }
+
+  getAll(): Observable<Post[]> {
+    return this.http.get(`${environment.fbDbUrl}/posts.json`)
+      .pipe(map((response: {[key: string]: any}) => {
+        return Object.keys(response).map(key => ({
+            ...response[key],
+            id: key,
+          }))
       }))
   }
 }

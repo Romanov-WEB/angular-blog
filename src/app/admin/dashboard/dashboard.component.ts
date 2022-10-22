@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {PostsService} from "../../shared/services/posts.service";
+import {Post} from "../shared/interfaces";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-dashboard',
@@ -6,11 +9,15 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
+  posts$: Observable<Post[]>;
+  searchStr = '';
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private postsService: PostsService) {
+    this.posts$ = this.postsService.getAll();
   }
 
+  remove(id: string) {
+
+  }
 }

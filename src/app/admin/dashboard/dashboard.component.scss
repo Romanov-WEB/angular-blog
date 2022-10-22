@@ -1,0 +1,29 @@
+.form-container {
+  padding: 20px 0;
+}
+
+.form-control{
+  input {
+    font-size: 18px;
+    padding: 5px 2px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.table {
+  width: 100%;
+}
+
+.open {
+  font-size: 16px;
+  background: none;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.delete {
+  color: #da4e4e;
+  cursor: pointer;
+}
