@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
-import {Post} from "../../admin/shared/interfaces";
-import {environment} from "../../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import {filter, map, Observable} from "rxjs";
+import { Post } from "../../admin/shared/interfaces";
+import { environment } from "../../../environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
@@ -22,11 +22,26 @@ export class PostsService {
 
   getAll(): Observable<Post[]> {
     return this.http.get(`${environment.fbDbUrl}/posts.json`)
-      .pipe(map((response: {[key: string]: any}) => {
-        return Object.keys(response).map(key => ({
+      .pipe(
+        filter(Boolean),
+        map((response) => {
+          return Object.keys(response).map(key => ({
             ...response[key],
             id: key,
           }))
       }))
   }
+
+  removePost(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`)
+  }
+
+  getById(id) {
+
+  }
+
+  update(post) {
+
+  }
+
 }

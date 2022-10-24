@@ -2,7 +2,7 @@
   <div class="form-control">
     <input type="text" placeholder="Найти пост..." [(ngModel)]="searchStr">
   </div>
-  <table>
+  <table *ngIf="posts.length">
     <thead>
     <tr>
       <th>#</th>
