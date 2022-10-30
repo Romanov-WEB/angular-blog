@@ -1,9 +1,10 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {BehaviorSubject, switchMap, takeUntil} from "rxjs";
+import {BehaviorSubject, filter, map, Observable, switchMap, takeUntil, tap} from "rxjs";
 import {PostsService} from "../../shared/services/posts.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {DestroyService} from "../shared/services/destroy.service";
+import {Post} from "../shared/interfaces";
 
 @Component({
   selector: 'app-edit-page',
@@ -12,9 +13,10 @@ import {DestroyService} from "../shared/services/destroy.service";
   providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditPageComponent implements OnInit {
+export class EditPageComponent {
   form: FormGroup
-  postId$ = new BehaviorSubject<string>('')
+  post$: Observable<Post>;
+  updatedPost$: BehaviorSubject<string> = new BehaviorSubject<string>('')
 
   constructor(
     @Inject(DestroyService) private destroy$: DestroyService,
@@ -23,45 +25,38 @@ export class EditPageComponent implements OnInit {
     private router: Router,
     private postsService: PostsService
   ) {
-    this.getId()
+    this.post$ = this.route.params
+      .pipe(
+        map((params) => params['id']),
+        filter(Boolean),
+        switchMap((id) => {
+          this.updatedPost$.next(id);
+          return this.postsService.getById(id)
+        }),
+        tap((post) => this.setForm(post))
+      )
   }
 
-  getId() {
-    this.route.params.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe((param) => {
-      this.postId$.next(param['id'])
-    })
-  }
-
-  ngOnInit() {
-    this.postId$.pipe(
-      switchMap(id => {
-        return this.postsService.getById(id)
-      }),
-      takeUntil(this.destroy$)
-    ).subscribe((post) => {
-      this.form = new FormGroup({
-        title: new FormControl(post.title, Validators.required),
-        text: new FormControl(post.text, Validators.required),
-        author: new FormControl(post.author,  Validators.required)
-      })
-      this.cdr.markForCheck()
+  private setForm(post: Post): void {
+    this.form = new FormGroup({
+      title: new FormControl(post.title, Validators.required),
+      text: new FormControl(post.text, Validators.required),
+      author: new FormControl(post.author, Validators.required)
     })
   }
 
   submit() {
-    if (this.form.invalid){
+    if (this.form.invalid) {
       return
     }
 
-    this.postsService.update(this.postId$.getValue(),{
-      ...this.form.value,
-      date: new Date(),
-    }).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.router.navigate(['/admin', 'dashboard'])
-    })
+    this.post$ = this.updatedPost$
+      .pipe(
+        switchMap((id) => this.postsService.update(id, {
+          ...this.form.value,
+          date: new Date(),
+        })),
+        tap(() => this.router.navigate(['/admin', 'dashboard']))
+      )
   }
 }
