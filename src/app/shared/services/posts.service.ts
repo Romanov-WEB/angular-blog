@@ -36,11 +36,11 @@ export class PostsService {
     return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`)
   }
 
-  getById(id) {
-
+  getById(id): Observable<Post> {
+    return this.http.get<Post>(`${environment.fbDbUrl}/posts/${id}.json`)
   }
 
-  update(post) {
+  update(post: Post) {
 
   }
 
