@@ -10,6 +10,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
 import {AuthGuard} from "./shared/services/auth.guard";
 import { SearchPipe } from './shared/search.pipe';
+import {EditPostResolver} from "./edit-page/edit-post.resolver";
+import {EditPostIdResolver} from "./edit-page/edit-post-id.resolver";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,10 @@ import { SearchPipe } from './shared/search.pipe';
           { path: 'login', component: LoginPageComponent },
           { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
           { path: 'create', component: CreatePageComponent, canActivate: [AuthGuard] },
-          { path: 'post/:id/edit', component: EditPageComponent, canActivate: [AuthGuard] },
+          { path: 'post/:id/edit', component: EditPageComponent, canActivate: [AuthGuard], resolve: {
+              post: EditPostResolver,
+              id : EditPostIdResolver
+          } },
         ]
       }
     ])
