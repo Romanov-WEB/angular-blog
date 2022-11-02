@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import {filter, map, Observable, switchMap, takeUntil, tap} from "rxjs";
+import { filter, map, Observable, switchMap, tap } from "rxjs";
 import { PostsService } from "../../shared/services/posts.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Post } from "../shared/interfaces";
@@ -22,10 +22,8 @@ export class EditPageComponent {
   ) {
     this.post$ = this.route.data.pipe(
       filter(Boolean),
-      map(data => {
-        this.setForm(data['post'])
-        return data['post']
-      })
+      map(({ post }) => post),
+      tap((post) => this.setForm(post))
     )
   }
 
@@ -42,12 +40,13 @@ export class EditPageComponent {
       return
     }
 
-    this.post$ = this.route.data.pipe(
-      switchMap((data) => {
-        return  this.postsService.update(data['id'], {
+    this.post$ = this.route.params.pipe(
+      map(({ id }) =>  id),
+      switchMap((id) => {
+        return  this.postsService.update(id, {
           ...this.form.value,
+          id,
           date: new Date(),
-          id: data['id']
         })
       }),
       tap(() => this.router.navigate(['/admin', 'dashboard'])),
