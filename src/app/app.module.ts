@@ -1,17 +1,17 @@
-import {NgModule, Provider} from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {registerLocaleData} from "@angular/common";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { registerLocaleData } from "@angular/common";
 import ruLocale from "@angular/common/locales/ru";
 
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { PostPageComponent } from './post-page/post-page.component';
-import {AppRoutingModule} from "./app-routing.module";
+import { AppRoutingModule } from "./app-routing.module";
 import { PostComponent } from './shared/components/post/post.component';
-import {SharedModule} from "./shared/shared.module";
-import {AuthInterceptor} from "./shared/auth.interceptor";
+import { SharedModule } from "./shared/shared.module";
+import { AuthInterceptor } from "./shared/auth.interceptor";
 
 registerLocaleData(ruLocale, 'ru')
 

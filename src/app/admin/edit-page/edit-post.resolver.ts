@@ -4,8 +4,8 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import {Post} from "../shared/interfaces";
-import {PostsService} from "../../shared/services/posts.service";
+import { Post } from "../shared/interfaces";
+import { PostsService } from "../../shared/services/posts.service";
 
 @Injectable({
   providedIn: 'root'

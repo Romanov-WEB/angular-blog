@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {User} from "../shared/interfaces";
-import {AuthService} from "../shared/services/auth.service";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {RedirectService} from "../../shared/services/redirect.service";
-import {switchMap, takeUntil} from "rxjs";
-import {DestroyService} from "../shared/services/destroy.service";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { User } from "../shared/interfaces";
+import { AuthService } from "../shared/services/auth.service";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { RedirectService } from "../../shared/services/redirect.service";
+import { switchMap, takeUntil } from "rxjs";
+import { DestroyService } from "../shared/services/destroy.service";
 
 @Component({
   selector: 'app-login-page',

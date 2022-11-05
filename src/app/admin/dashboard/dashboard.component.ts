@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
-import {PostsService} from "../../shared/services/posts.service";
-import {Post} from "../shared/interfaces";
-import {BehaviorSubject, map, Observable, pairwise, Subject, Subscription, switchMap, takeUntil} from "rxjs";
-import {DestroyService} from "../shared/services/destroy.service";
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { PostsService } from "../../shared/services/posts.service";
+import { Post } from "../shared/interfaces";
+import { BehaviorSubject, takeUntil } from "rxjs";
+import { DestroyService } from "../shared/services/destroy.service";
 
 @Component({
   selector: 'app-dashboard',
